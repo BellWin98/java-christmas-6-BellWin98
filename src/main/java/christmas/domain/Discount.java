@@ -1,15 +1,17 @@
 package christmas.domain;
 
-public enum Badge {
-    STAR("별", 5000),
-    TREE("트리", 10000),
-    SANTA("산타", 20000);
+public enum Discount {
+    CHRISTMAS_D_DAY_DISCOUNT("크리스마스 디데이 할인", 1000),
+    WEEKDAY_DISCOUNT("평일 할인", 2023),
+    WEEKEND_DISCOUNT("주말 할인", 2023),
+    SPECIAL_DISCOUNT("특별 할인", 1000),
+    GIFT("증정 이벤트", 25000);
 
-    private final String type;
-    private final int amount;
+    private final String message;
+    private final int discount;
 
-    Badge(String type, int amount){
-        this.type = type;
-        this.amount = amount;
+    Discount(String message, int discount){
+        this.message = message;
+        this.discount = discount;
     }
 }

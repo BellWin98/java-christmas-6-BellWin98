@@ -1,2 +1,5 @@
-package christmas.domain;public class EventPlanner {
+package christmas.domain;
+
+public class EventPlanner {
+    public EventPlanner(){}
 }
