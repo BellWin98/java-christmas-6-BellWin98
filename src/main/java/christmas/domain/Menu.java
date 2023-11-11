@@ -23,4 +23,13 @@ public enum Menu {
         this.name = name;
         this.price = price;
     }
+
+    public static boolean hasMenu(String menuInput){
+        for (Menu menu : Menu.values()){
+            if (menu.name.equals(menuInput)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

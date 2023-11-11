@@ -1,16 +1,32 @@
 package christmas.domain;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Order {
 
-    private final Map<Menu, Integer> orderSheet;
-    private final List<Discount> discounts;
-    private final Badge badge;
+    private final Map<String, Integer> orderSheet;
 
-    public Order(String order){
+    public Order(String menuInput){
+        Validator.validateMenu(menuInput);
+        orderSheet = toMap(menuInput);
+    }
 
+    public Map<String, Integer> toMap(String menuInput){
+        Map<String, Integer> order = new HashMap<>();
+        String[] menuInputSplitByComma = menuInput.split(",");
+        for (String menuInfo : menuInputSplitByComma) {
+            String[] menuInputSplitByHyphen = menuInfo.split("-");
+            order.put(menuInputSplitByHyphen[0], Integer.parseInt(menuInputSplitByHyphen[1]));
+        }
+        return order;
+    }
+
+    public void printOrderSheet(){
+        for (Map.Entry<String, Integer> entrySet : orderSheet.entrySet()) {
+            System.out.println(entrySet.getKey() + " : " + entrySet.getValue());
+        }
     }
 
     public int getTotalAmountBeforeDiscount(){
@@ -29,11 +45,11 @@ public class Order {
         return 0;
     }
 
-    public List<Discount> getDiscounts(){
-        return discounts;
-    }
-
-    public Badge getBadge(){
-        return badge;
-    }
+//    public List<Discount> getDiscounts(){
+//        return discounts;
+//    }
+//
+//    public Badge getBadge(){
+//        return badge;
+//    }
 }
