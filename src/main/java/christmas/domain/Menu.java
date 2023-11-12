@@ -24,12 +24,22 @@ public enum Menu {
         this.price = price;
     }
 
-    public static boolean hasMenu(String menuInput){
+    public static boolean hasMenu(String value){
         for (Menu menu : Menu.values()){
-            if (menu.name.equals(menuInput)) {
+            if (menu.name.equals(value)) {
                 return true;
             }
         }
         return false;
+    }
+
+    public static boolean isMenuTypeDrinks(String value){
+        String menuType = "";
+        for (Menu menu : Menu.values()){
+            if (menu.name.equals(value)) {
+                menuType = menu.type;
+            }
+        }
+        return menuType.equals("음료");
     }
 }
