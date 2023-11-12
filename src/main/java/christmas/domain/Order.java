@@ -2,8 +2,6 @@ package christmas.domain;
 
 import java.util.Map;
 
-import static christmas.domain.ChristmasException.MENU_IS_ONLY_DRINKS;
-
 public class Order {
     private final int date;
     private final Map<String, Integer> order;

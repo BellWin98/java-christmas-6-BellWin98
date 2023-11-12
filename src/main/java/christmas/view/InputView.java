@@ -1,17 +1,13 @@
 package christmas.view;
 
 import camp.nextstep.edu.missionutils.Console;
-import christmas.domain.ChristmasException;
 import christmas.domain.Menu;
 import christmas.domain.Validator;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import static christmas.domain.ChristmasException.MENU_IS_INVALID;
-import static christmas.domain.ChristmasException.MENU_IS_ONLY_DRINKS;
+import static christmas.domain.ChristmasException.*;
 
 public class InputView {
     public static int readDate(){
@@ -27,6 +23,7 @@ public class InputView {
         String orderInput = Console.readLine();
         Map<String, Integer> order = separateOrderIntoMenuAndCount(orderInput);
         validateOrderOnlyContainsDrinks(order);
+        validateMenuCountOverTwenty(order);
         return order;
     }
 
@@ -38,7 +35,7 @@ public class InputView {
             Validator.validateMenu(menuAndCount[0]);
             Validator.validateCountOfMenu(menuAndCount[1]);
             if (orderSheet.containsKey(menuAndCount[0])){
-                throw new IllegalArgumentException(MENU_IS_INVALID.getMessage());
+                throw new IllegalArgumentException(MENU_IS_INVALID_ERROR.getMessage());
             }
             orderSheet.put(menuAndCount[0], Integer.parseInt(menuAndCount[1]));
         }
@@ -53,7 +50,17 @@ public class InputView {
             }
         }
         if (count == order.size()){
-            throw new IllegalArgumentException(MENU_IS_ONLY_DRINKS.getMessage());
+            throw new IllegalArgumentException(MENU_IS_ONLY_DRINKS_ERROR.getMessage());
+        }
+    }
+
+    public static void validateMenuCountOverTwenty(Map<String, Integer> order){
+        int sum = order.values()
+                .stream()
+                .mapToInt(Integer::intValue)
+                .sum();
+        if (sum > 20){
+            throw new IllegalArgumentException(MENU_COUNT_OVER_TWENTY_ERROR.getMessage());
         }
     }
 }
