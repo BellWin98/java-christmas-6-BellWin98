@@ -18,14 +18,14 @@ public enum Menu {
     private final String name;
     private final int price;
 
-    Menu(String category, String name, int price){
+    Menu(String category, String name, int price) {
         this.category = category;
         this.name = name;
         this.price = price;
     }
 
-    public static boolean hasMenu(String menuName){
-        for (Menu menu : Menu.values()){
+    public static boolean hasMenu(String menuName) {
+        for (Menu menu : Menu.values()) {
             if (menu.name.equals(menuName)) {
                 return true;
             }
@@ -33,9 +33,9 @@ public enum Menu {
         return false;
     }
 
-    public static boolean isMenuCategoryDrinks(String menuName){
+    public static boolean isMenuCategoryDrinks(String menuName) {
         String menuCategory = "";
-        for (Menu menu : Menu.values()){
+        for (Menu menu : Menu.values()) {
             if (menu.name.equals(menuName)) {
                 menuCategory = menu.category;
                 break;
@@ -44,9 +44,9 @@ public enum Menu {
         return menuCategory.equals("음료");
     }
 
-    public static boolean isMenuCategoryMain(String menuName){
+    public static boolean isMenuCategoryMain(String menuName) {
         String menuCategory = "";
-        for (Menu menu : Menu.values()){
+        for (Menu menu : Menu.values()) {
             if (menu.name.equals(menuName)) {
                 menuCategory = menu.category;
                 break;
@@ -55,9 +55,9 @@ public enum Menu {
         return menuCategory.equals("메인");
     }
 
-    public static boolean isMenuCategoryDessert(String menuName){
+    public static boolean isMenuCategoryDessert(String menuName) {
         String menuCategory = "";
-        for (Menu menu : Menu.values()){
+        for (Menu menu : Menu.values()) {
             if (menu.name.equals(menuName)) {
                 menuCategory = menu.category;
                 break;
@@ -66,10 +66,10 @@ public enum Menu {
         return menuCategory.equals("디저트");
     }
 
-    public static int calculateSumOfPrice(String menuName, int count){
+    public static int calculateSumOfPrice(String menuName, int count) {
         int sum = 0;
-        for (Menu menu : Menu.values()){
-            if (menu.name.equals(menuName)){
+        for (Menu menu : Menu.values()) {
+            if (menu.name.equals(menuName)) {
                 sum += menu.price * count;
                 break;
             }

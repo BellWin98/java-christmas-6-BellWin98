@@ -8,14 +8,13 @@ public enum ChristmasException {
     MENU_COUNT_OVER_TWENTY_ERROR("[ERROR] 메뉴는 한 번에 최대 20개까지 주문할 수 있습니다. 다시 입력해주세요.");
 
 
-
     private final String message;
 
-    ChristmasException(String message){
+    ChristmasException(String message) {
         this.message = message;
     }
 
-    public String getMessage(){
+    public String getMessage() {
         return message;
     }
 }

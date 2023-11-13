@@ -10,7 +10,7 @@ public enum Discount {
     private final String content;
     private final int amount;
 
-    Discount(String content, int amount){
+    Discount(String content, int amount) {
         this.content = content;
         this.amount = amount;
     }

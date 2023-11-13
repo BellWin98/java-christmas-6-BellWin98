@@ -8,11 +8,13 @@ import java.util.Map;
 
 public class EventPlanner {
     private final EventCalendar eventCalendar = new EventCalendar();
-    public EventPlanner(){}
 
-    public void run (){
+    public EventPlanner() {
+    }
+
+    public void run() {
         Order order = inputReservationInfo();
-        if (order.isSumOverMinimumOrderAmount()){
+        if (order.isSumOverMinimumOrderAmount()) {
             List<String> events = eventCalendar.findEvent(order.getReservationDate());
             order.applyBenefits(events);
             OutputView.printBenefits(order);
@@ -20,16 +22,16 @@ public class EventPlanner {
         OutputView.printBenefits(order);
     }
 
-    public Order inputReservationInfo(){
+    public Order inputReservationInfo() {
         int date = inputDate();
         Map<String, Integer> order = inputOrder();
         return new Order(date, order);
     }
 
-    public int inputDate(){
+    public int inputDate() {
         try {
             return InputView.readDate();
-        } catch (IllegalArgumentException exception){
+        } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception.getMessage());
             return inputDate();
         }
