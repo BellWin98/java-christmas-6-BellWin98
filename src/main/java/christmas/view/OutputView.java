@@ -16,7 +16,7 @@ public class OutputView {
         printBenefitDetails(order);
         printTotalBenefitAmount(order);
         printExpectedPaymentAmount(order);
-//        printBadge(order.getBadge());
+        printBadge(order);
     }
 
     public static void printErrorMessage(String message){
@@ -69,8 +69,9 @@ public class OutputView {
         System.out.println(decimalFormat.format(order.getTotalOrderAmountAfterDiscount())+"원\n");
     }
 
-    public void printBadge(Badge badge){
+    public static void printBadge(Order order){
         System.out.println("<12월 이벤트 배지>");
-        // 없으면 없음 출력
+        String badge = Badge.findBadge(order.calculateTotalBenefitAmount());
+        System.out.println(badge);
     }
 }
