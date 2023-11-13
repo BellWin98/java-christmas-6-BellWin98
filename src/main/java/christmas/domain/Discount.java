@@ -7,11 +7,19 @@ public enum Discount {
     SPECIAL_DISCOUNT("특별 할인", 1000),
     GIFT("증정 이벤트", 25000);
 
-    private final String message;
+    private final String content;
     private final int discount;
 
-    Discount(String message, int discount){
-        this.message = message;
+    Discount(String content, int discount){
+        this.content = content;
         this.discount = discount;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public int getDiscount() {
+        return discount;
     }
 }

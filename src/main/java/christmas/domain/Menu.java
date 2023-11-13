@@ -1,10 +1,12 @@
 package christmas.domain;
 
+import java.util.Map;
+
 public enum Menu {
     MUSHROOM_SOUP("애피타이저", "양송이수프", 6000),
     TAPAS("애피타이저", "타파스", 5500),
     CAESAR_SALAD("애피타이저", "시저샐러드", 8000),
-    T_BONE_STEAK("메인", "시저샐러드", 55000),
+    T_BONE_STEAK("메인", "티본스테이크", 55000),
     BBQ_RIBS("메인", "바비큐립", 54000),
     SEAFOOD_PASTA("메인", "해산물파스타", 35000),
     CHRISTMAS_PASTA("메인", "크리스마스파스타", 25000),
@@ -24,22 +26,32 @@ public enum Menu {
         this.price = price;
     }
 
-    public static boolean hasMenu(String value){
+    public static boolean hasMenu(String menuName){
         for (Menu menu : Menu.values()){
-            if (menu.name.equals(value)) {
+            if (menu.name.equals(menuName)) {
                 return true;
             }
         }
         return false;
     }
 
-    public static boolean isMenuTypeDrinks(String value){
+    public static boolean isMenuTypeDrinks(String menuName){
         String menuType = "";
         for (Menu menu : Menu.values()){
-            if (menu.name.equals(value)) {
+            if (menu.name.equals(menuName)) {
                 menuType = menu.type;
             }
         }
         return menuType.equals("음료");
+    }
+
+    public static int calculateSumOfPrice(String menuName, int count){
+        int sum = 0;
+        for (Menu menu : Menu.values()){
+            if (menu.name.equals(menuName)){
+                sum += menu.price * count;
+            }
+        }
+        return sum;
     }
 }
