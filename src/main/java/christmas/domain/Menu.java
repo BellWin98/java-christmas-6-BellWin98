@@ -1,7 +1,5 @@
 package christmas.domain;
 
-import java.util.Map;
-
 public enum Menu {
     MUSHROOM_SOUP("애피타이저", "양송이수프", 6000),
     TAPAS("애피타이저", "타파스", 5500),
@@ -16,12 +14,12 @@ public enum Menu {
     RED_WINE("음료", "레드와인", 60000),
     CHAMPAGNE("음료", "샴페인", 25000);
 
-    private final String type;
+    private final String category;
     private final String name;
     private final int price;
 
-    Menu(String type, String name, int price){
-        this.type = type;
+    Menu(String category, String name, int price){
+        this.category = category;
         this.name = name;
         this.price = price;
     }
@@ -35,14 +33,37 @@ public enum Menu {
         return false;
     }
 
-    public static boolean isMenuTypeDrinks(String menuName){
-        String menuType = "";
+    public static boolean isMenuCategoryDrinks(String menuName){
+        String menuCategory = "";
         for (Menu menu : Menu.values()){
             if (menu.name.equals(menuName)) {
-                menuType = menu.type;
+                menuCategory = menu.category;
+                break;
             }
         }
-        return menuType.equals("음료");
+        return menuCategory.equals("음료");
+    }
+
+    public static boolean isMenuCategoryMain(String menuName){
+        String menuCategory = "";
+        for (Menu menu : Menu.values()){
+            if (menu.name.equals(menuName)) {
+                menuCategory = menu.category;
+                break;
+            }
+        }
+        return menuCategory.equals("메인");
+    }
+
+    public static boolean isMenuCategoryDessert(String menuName){
+        String menuCategory = "";
+        for (Menu menu : Menu.values()){
+            if (menu.name.equals(menuName)) {
+                menuCategory = menu.category;
+                break;
+            }
+        }
+        return menuCategory.equals("디저트");
     }
 
     public static int calculateSumOfPrice(String menuName, int count){
@@ -50,6 +71,7 @@ public enum Menu {
         for (Menu menu : Menu.values()){
             if (menu.name.equals(menuName)){
                 sum += menu.price * count;
+                break;
             }
         }
         return sum;
