@@ -45,7 +45,7 @@ public class InputView {
     public static void validateOrderOnlyContainsDrinks(Map<String, Integer> order){
         int count = 0;
         for (String key : order.keySet()){
-            if (Menu.isMenuTypeDrinks(key)){
+            if (Menu.isMenuCategoryDrinks(key)){
                 count++;
             }
         }
