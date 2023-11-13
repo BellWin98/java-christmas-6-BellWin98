@@ -1,46 +1,72 @@
 package christmas.view;
 
 import christmas.domain.Badge;
-import christmas.domain.Discount;
-import christmas.domain.Menu;
 import christmas.domain.Order;
 
-import java.util.List;
+import java.text.DecimalFormat;
+import java.util.Map;
 
 public class OutputView {
-    public void printBenefits(int date, Order order){
-        System.out.printf("12월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!", date);
-        printOrderMenu(order.getOrderMenu(), order.getMenuCount());
-        printTotalAmountBeforeDiscount(order.getTotalAmountBeforeDiscount());
-        printDiscountDetails(order.getDiscounts(), order.getMenuCount());
-        printExpectedPaymentAmount(order.getTotalAmountAfterDiscount());
-        printBadge(order.getBadge());
+    private static final DecimalFormat decimalFormat = new DecimalFormat("###,###");
+
+    public static void printBenefits(Order order){
+        System.out.println("12월 " + order.getReservationDate()+"일에 " + "우테코 식당에서 받을 이벤트 혜택 미리 보기!\n");
+        printOrderMenu(order);
+        printTotalAmountBeforeDiscount(order);
+        printBenefitDetails(order);
+        printTotalBenefitAmount(order);
+        printExpectedPaymentAmount(order);
+//        printBadge(order.getBadge());
     }
 
-    public void printOrderMenu(List<Menu> orderMenu, int count){
+    public static void printErrorMessage(String message){
+        System.out.println(message);
+    }
+
+    public static void printOrderMenu(Order order){
         System.out.println("<주문 메뉴>");
+        for (Map.Entry<String, Integer> orderSheet : order.getOrder().entrySet()) {
+            System.out.println(orderSheet.getKey() + " " + orderSheet.getValue() + "개");
+        }
+        System.out.println();
     }
 
-    public void printTotalAmountBeforeDiscount(int amount){
+    public static void printTotalAmountBeforeDiscount(Order order){
         System.out.println("<할인 전 총주문 금액>");
-        // 천원 단위 쉼표 출력
-
-
+        System.out.println(decimalFormat.format(order.getTotalOrderAmountBeforeDiscount()) + "원\n");
         System.out.println("<증정 메뉴>");
-        // 샴페인 1개 또는 없음
+        if (order.canGetGift()){
+            System.out.println("샴페인 1개\n");
+            return;
+        }
+        System.out.println("없음\n");
     }
 
-    public void printDiscountDetails(List<Discount> discounts, int count){
+    public static void printBenefitDetails(Order order){
         System.out.println("<혜택 내역>");
-        // 천원 단위 쉼표 구분 및 마이너스 출력
-        System.out.println("<총혜택 금액>");
-        // 천원 단위 쉼표 구분하여 출력
+        if (order.getBenefitsInfo().size() > 0){
+            Map<String, Integer> benefitsInfo = order.getBenefitsInfo();
+            for (Map.Entry<String, Integer> benefit : benefitsInfo.entrySet()){
+                System.out.println(benefit.getKey() + ": " + "-" + decimalFormat.format(benefit.getValue()) + "원");
+            }
+            System.out.println();
+            return;
+        }
+        System.out.println("없음\n");
     }
 
-    public void printExpectedPaymentAmount(int amount){
+    public static void printTotalBenefitAmount(Order order){
+        System.out.println("<총혜택 금액>");
+        if (order.calculateTotalBenefitAmount() == 0){
+            System.out.println("0원\n");
+            return;
+        }
+        System.out.println("-" + decimalFormat.format(order.calculateTotalBenefitAmount()) + "원\n");
+    }
+
+    public static void printExpectedPaymentAmount(Order order){
         System.out.println("<할인 후 예상 결제 금액>");
-        // 천원 단위 쉼표 구분하여 출력
-        System.out.println(amount);
+        System.out.println(decimalFormat.format(order.getTotalOrderAmountAfterDiscount())+"원\n");
     }
 
     public void printBadge(Badge badge){
