@@ -1,9 +1,11 @@
 package christmas.domain;
 
+import java.util.Arrays;
+
 public enum Badge {
-    SANTA("산타", 20000),
-    TREE("트리", 10000),
-    STAR("별", 5000);
+    SANTA("산타", 20_000),
+    TREE("트리", 10_000),
+    STAR("별", 5_000);
 
     private final String category;
     private final int amount;
@@ -14,11 +16,14 @@ public enum Badge {
     }
 
     public static String findBadge(int totalBenefitAmount) {
-        for (Badge badge : Badge.values()) {
-            if (totalBenefitAmount >= badge.amount) {
-                return badge.category;
-            }
-        }
-        return "없음";
+        return Arrays.stream(Badge.values())
+                .filter(badge -> totalBenefitAmount >= badge.amount)
+                .findFirst()
+                .map(Badge::getCategory)
+                .orElse("없음");
+    }
+
+    public String getCategory() {
+        return category;
     }
 }
