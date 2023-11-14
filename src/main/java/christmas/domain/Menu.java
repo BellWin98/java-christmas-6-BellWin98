@@ -1,5 +1,7 @@
 package christmas.domain;
 
+import java.util.Arrays;
+
 public enum Menu {
     MUSHROOM_SOUP("애피타이저", "양송이수프", 6000),
     TAPAS("애피타이저", "타파스", 5500),
@@ -25,55 +27,39 @@ public enum Menu {
     }
 
     public static boolean hasMenu(String menuName) {
-        for (Menu menu : Menu.values()) {
-            if (menu.name.equals(menuName)) {
-                return true;
-            }
-        }
-        return false;
+        return Arrays.stream(Menu.values())
+                .anyMatch(menu -> menu.name.equals(menuName));
     }
 
     public static boolean isMenuCategoryDrinks(String menuName) {
-        String menuCategory = "";
-        for (Menu menu : Menu.values()) {
-            if (menu.name.equals(menuName)) {
-                menuCategory = menu.category;
-                break;
-            }
-        }
-        return menuCategory.equals("음료");
+        return Arrays.stream(Menu.values())
+                .filter(menu -> menu.name.equals(menuName))
+                .findFirst()
+                .map(menu -> menu.category.equals("음료"))
+                .orElse(false);
     }
 
     public static boolean isMenuCategoryMain(String menuName) {
-        String menuCategory = "";
-        for (Menu menu : Menu.values()) {
-            if (menu.name.equals(menuName)) {
-                menuCategory = menu.category;
-                break;
-            }
-        }
-        return menuCategory.equals("메인");
+        return Arrays.stream(Menu.values())
+                .filter(menu -> menu.name.equals(menuName))
+                .findFirst()
+                .map(menu -> menu.category.equals("메인"))
+                .orElse(false);
     }
 
     public static boolean isMenuCategoryDessert(String menuName) {
-        String menuCategory = "";
-        for (Menu menu : Menu.values()) {
-            if (menu.name.equals(menuName)) {
-                menuCategory = menu.category;
-                break;
-            }
-        }
-        return menuCategory.equals("디저트");
+        return Arrays.stream(Menu.values())
+                .filter(menu -> menu.name.equals(menuName))
+                .findFirst()
+                .map(menu -> menu.category.equals("디저트"))
+                .orElse(false);
     }
 
-    public static int calculateSumOfPrice(String menuName, int count) {
-        int sum = 0;
-        for (Menu menu : Menu.values()) {
-            if (menu.name.equals(menuName)) {
-                sum += menu.price * count;
-                break;
-            }
-        }
-        return sum;
+    public static int calculateSumOfMenuPrice(String menuName, int count) {
+        return Arrays.stream(Menu.values())
+                .filter(menu -> menu.name.equals(menuName))
+                .findFirst()
+                .map(menu -> menu.price * count)
+                .orElse(0);
     }
 }
