@@ -33,7 +33,7 @@ public class OutputView {
 
     public static void printTotalAmountBeforeDiscount(Order order) {
         System.out.println("<할인 전 총주문 금액>");
-        System.out.println(decimalFormat.format(order.getTotalOrderAmountBeforeDiscount()) + "원\n");
+        System.out.println(decimalFormat.format(order.getOrderAmount()) + "원\n");
         System.out.println("<증정 메뉴>");
         if (order.canGetGift()) {
             System.out.println("샴페인 1개\n");
@@ -57,21 +57,21 @@ public class OutputView {
 
     public static void printTotalBenefitAmount(Order order) {
         System.out.println("<총혜택 금액>");
-        if (order.calculateTotalBenefitAmount() == 0) {
+        if (order.calculateTotalDiscount() == 0) {
             System.out.println("0원\n");
             return;
         }
-        System.out.println("-" + decimalFormat.format(order.calculateTotalBenefitAmount()) + "원\n");
+        System.out.println("-" + decimalFormat.format(order.calculateTotalDiscount()) + "원\n");
     }
 
     public static void printExpectedPaymentAmount(Order order) {
         System.out.println("<할인 후 예상 결제 금액>");
-        System.out.println(decimalFormat.format(order.getTotalOrderAmountAfterDiscount()) + "원\n");
+        System.out.println(decimalFormat.format(order.getTotalAmount()) + "원\n");
     }
 
     public static void printBadge(Order order) {
         System.out.println("<12월 이벤트 배지>");
-        String badge = Badge.findBadge(order.calculateTotalBenefitAmount());
+        String badge = Badge.findBadge(order.calculateTotalDiscount());
         System.out.println(badge);
     }
 }
