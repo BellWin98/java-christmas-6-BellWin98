@@ -7,7 +7,7 @@ import christmas.domain.Validator;
 import java.util.HashMap;
 import java.util.Map;
 
-import static christmas.domain.ChristmasException.*;
+import static christmas.exception.ChristmasException.*;
 
 public class InputView {
     public static int readDate() {
