@@ -12,6 +12,9 @@ public class EventCalendar {
     private static final int MONTH = 12;
     private static final int CHRISTMAS_EVENT_START_DATE = 1;
     private static final int CHRISTMAS_EVENT_END_DATE = 25;
+    private static final int MONDAY = 1;
+    private static final int THURSDAY = 4;
+    private static final int SUNDAY = 7;
 
     public EventCalendar() {
     }
@@ -21,10 +24,10 @@ public class EventCalendar {
         if (isDateForChristmasEvent(date)) {
             events.add(CHRISTMAS_D_DAY.getContent());
         }
-        if (findDayOfWeek(date) == 7 || isDateChristmas(date)) {
+        if (isDateForSpecialEvent(date)) {
             events.add(SPECIAL.getContent());
         }
-        if (findDayOfWeek(date) >= 1 && findDayOfWeek(date) <= 4 || findDayOfWeek(date) == 7) {
+        if (isDateForWeekday(date)) {
             events.add(WEEKDAY.getContent());
             return events;
         }
@@ -38,8 +41,17 @@ public class EventCalendar {
         return dayOfWeek.getValue();
     }
 
-    public boolean isDateForChristmasEvent(int date) {
+    private boolean isDateForChristmasEvent(int date) {
         return date >= CHRISTMAS_EVENT_START_DATE && date <= CHRISTMAS_EVENT_END_DATE;
+    }
+
+    private boolean isDateForSpecialEvent(int date) {
+        return findDayOfWeek(date) == SUNDAY || isDateChristmas(date);
+    }
+
+    private boolean isDateForWeekday(int date) {
+        int dayOfWeek = findDayOfWeek(date);
+        return (dayOfWeek >= MONDAY && dayOfWeek <= THURSDAY) || dayOfWeek == SUNDAY;
     }
 
     public boolean isDateChristmas(int date) {
