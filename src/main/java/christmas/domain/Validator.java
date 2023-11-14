@@ -2,7 +2,7 @@ package christmas.domain;
 
 import java.util.regex.Pattern;
 
-import static christmas.domain.ChristmasException.*;
+import static christmas.exception.ChristmasException.*;
 
 public class Validator {
     private static final int START_DATE = 1;
@@ -28,7 +28,6 @@ public class Validator {
         if (value.isEmpty()) {
             throw new IllegalArgumentException(MENU_IS_INVALID_ERROR.getMessage());
         }
-        // 메뉴판에 있는 메뉴인지 확인
         if (!Menu.hasMenu(value)) {
             throw new IllegalArgumentException(MENU_IS_INVALID_ERROR.getMessage());
         }
