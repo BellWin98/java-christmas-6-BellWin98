@@ -17,18 +17,17 @@ public class EventPlanner {
         if (order.isSumOverMinimumOrderAmount()) {
             List<String> events = eventCalendar.findEvent(order.getReservationDate());
             order.applyBenefits(events);
-            OutputView.printBenefits(order);
         }
         OutputView.printBenefits(order);
     }
 
-    public Order inputReservationInfo() {
+    private Order inputReservationInfo() {
         int date = inputDate();
         Map<String, Integer> order = inputOrder();
         return new Order(date, order);
     }
 
-    public int inputDate() {
+    private int inputDate() {
         try {
             return InputView.readDate();
         } catch (IllegalArgumentException exception) {
@@ -37,7 +36,7 @@ public class EventPlanner {
         }
     }
 
-    public Map<String, Integer> inputOrder() {
+    private Map<String, Integer> inputOrder() {
         try {
             return InputView.readOrder();
         } catch (IllegalArgumentException exception) {
