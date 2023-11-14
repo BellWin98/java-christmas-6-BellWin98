@@ -1,4 +1,4 @@
-package christmas.domain;
+package christmas.exception;
 
 public enum ChristmasException {
     DATE_IS_EMPTY_ERROR("[ERROR] 입력된 날짜가 없습니다. 날짜를 입력해주세요."),
