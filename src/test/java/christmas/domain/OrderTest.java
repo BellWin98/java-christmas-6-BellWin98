@@ -15,7 +15,7 @@ public class OrderTest {
 
     @Test
     @DisplayName("메뉴의 개수가 20개를 초과하면 예외가 발생한다.")
-    void givenMenusOverTwenty_ThenFail(){
+    void givenMenusOverTwenty_ThenFail() {
 
         Map<String, Integer> order = new HashMap<>();
         order.put("해산물파스타", 10);
