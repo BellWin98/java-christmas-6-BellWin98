@@ -35,7 +35,7 @@ public class EventCalendar {
         return events;
     }
 
-    public int findDayOfWeek(int reservationDate) {
+    private int findDayOfWeek(int reservationDate) {
         LocalDate date = LocalDate.of(YEAR, MONTH, reservationDate);
         DayOfWeek dayOfWeek = date.getDayOfWeek();
         return dayOfWeek.getValue();
@@ -54,7 +54,7 @@ public class EventCalendar {
         return (dayOfWeek >= MONDAY && dayOfWeek <= THURSDAY) || dayOfWeek == SUNDAY;
     }
 
-    public boolean isDateChristmas(int date) {
+    private boolean isDateChristmas(int date) {
         return date == CHRISTMAS_EVENT_END_DATE;
     }
 }

@@ -23,7 +23,7 @@ public class OutputView {
         System.out.println(message);
     }
 
-    public static void printOrderMenu(Order order) {
+    private static void printOrderMenu(Order order) {
         System.out.println("<주문 메뉴>");
         for (Map.Entry<String, Integer> orderSheet : order.getOrder().entrySet()) {
             System.out.println(orderSheet.getKey() + " " + orderSheet.getValue() + "개");
@@ -31,7 +31,7 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printTotalAmountBeforeDiscount(Order order) {
+    private static void printTotalAmountBeforeDiscount(Order order) {
         System.out.println("<할인 전 총주문 금액>");
         System.out.println(decimalFormat.format(order.getOrderAmount()) + "원\n");
         System.out.println("<증정 메뉴>");
@@ -42,7 +42,7 @@ public class OutputView {
         System.out.println("없음\n");
     }
 
-    public static void printBenefitDetails(Order order) {
+    private static void printBenefitDetails(Order order) {
         System.out.println("<혜택 내역>");
         if (order.getBenefitsInfo().size() > 0) {
             Map<String, Integer> benefitsInfo = order.getBenefitsInfo();
@@ -55,7 +55,7 @@ public class OutputView {
         System.out.println("없음\n");
     }
 
-    public static void printTotalBenefitAmount(Order order) {
+    private static void printTotalBenefitAmount(Order order) {
         System.out.println("<총혜택 금액>");
         if (order.calculateTotalDiscount() == 0) {
             System.out.println("0원\n");
@@ -64,12 +64,12 @@ public class OutputView {
         System.out.println("-" + decimalFormat.format(order.calculateTotalDiscount()) + "원\n");
     }
 
-    public static void printExpectedPaymentAmount(Order order) {
+    private static void printExpectedPaymentAmount(Order order) {
         System.out.println("<할인 후 예상 결제 금액>");
         System.out.println(decimalFormat.format(order.getTotalAmount()) + "원\n");
     }
 
-    public static void printBadge(Order order) {
+    private static void printBadge(Order order) {
         System.out.println("<12월 이벤트 배지>");
         String badge = Badge.findBadge(order.calculateTotalDiscount());
         System.out.println(badge);

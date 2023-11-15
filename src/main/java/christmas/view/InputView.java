@@ -27,7 +27,17 @@ public class InputView {
         return order;
     }
 
-    public static Map<String, Integer> separateOrderIntoMenuAndCount(String value) {
+    public static void validateMenuCountOverTwenty(Map<String, Integer> order) {
+        int sum = order.values()
+                .stream()
+                .mapToInt(Integer::intValue)
+                .sum();
+        if (sum > 20) {
+            throw new IllegalArgumentException(MENU_COUNT_OVER_TWENTY_ERROR.getMessage());
+        }
+    }
+
+    private static Map<String, Integer> separateOrderIntoMenuAndCount(String value) {
         Map<String, Integer> orderSheet = new HashMap<>();
         String[] orders = value.split(",");
         for (String order : orders) {
@@ -42,7 +52,7 @@ public class InputView {
         return orderSheet;
     }
 
-    public static void validateOrderOnlyContainsDrinks(Map<String, Integer> order) {
+    private static void validateOrderOnlyContainsDrinks(Map<String, Integer> order) {
         int count = 0;
         for (String key : order.keySet()) {
             if (Menu.isMenuCategoryDrinks(key)) {
@@ -51,16 +61,6 @@ public class InputView {
         }
         if (count == order.size()) {
             throw new IllegalArgumentException(MENU_IS_ONLY_DRINKS_ERROR.getMessage());
-        }
-    }
-
-    public static void validateMenuCountOverTwenty(Map<String, Integer> order) {
-        int sum = order.values()
-                .stream()
-                .mapToInt(Integer::intValue)
-                .sum();
-        if (sum > 20) {
-            throw new IllegalArgumentException(MENU_COUNT_OVER_TWENTY_ERROR.getMessage());
         }
     }
 }
